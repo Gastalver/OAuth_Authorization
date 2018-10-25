@@ -1,15 +1,12 @@
 <div>
-  <div style="
-    border-width: 10px;
-    background-color: beige;
-    border-color: #402a2a;
-    max-width: 200px;">
+  <div class="main">
     <img src="{{userInfo.imageUrl}}" />
     <h2>{{userInfo.name}}</h2>
     <h6>{{userInfo.email}}</h6>
   </div>
-  <div>
-        <div *ngFor="let file of files" style="height: inherit; background-color: rgb(215, 243, 138)">
+  <div class="drive-box">
+    <h1>Files in Google Drive</h1>
+        <div *ngFor="let file of files" class="drive-item">
           <H2>{{file.title}}</H2>
           <p>Shared date: {{file.sharedWithMeDate}}</p>
         </div>

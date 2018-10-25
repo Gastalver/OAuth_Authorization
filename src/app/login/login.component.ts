@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -9,7 +9,7 @@ declare const gapi: any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   public auth2: any;
 
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.cookieService.set('email', profile.getEmail());
         this.cookieService.set('imageUrl', profile.getImageUrl());
         this.router.navigate(['/home']);
-      }, (error) => { 
+      }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
       });
   }

@@ -1,0 +1,16 @@
+.main{
+    border-width: 10px;
+    background-color: beige;
+    border-color: #402a2a;
+    max-width: 200px;
+}
+
+.drive-box {
+    background-color:beige;
+    width: 80%
+}
+
+.drive-item {
+    height: inherit;
+    background-color: rgb(223, 223, 201);
+}   
