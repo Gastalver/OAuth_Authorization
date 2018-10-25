@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+
 declare const gapi: any;
 
 @Component({
@@ -12,9 +13,9 @@ declare const gapi: any;
 })
 export class HomeComponent implements OnInit {
 
-  GoogleAuth;
   userInfo = { 'name': '', 'email': '', 'imageUrl': '' };
-  tokenValue = '';
+  access_token = '';
+  files = [];
 
   constructor(
     private cookieService: CookieService,
@@ -29,20 +30,36 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Initialize details
+   */
   initializeDetails() {
-    this.tokenValue = this.cookieService.get('TokenID');
+    this.access_token = this.cookieService.get('access_token');
     this.userInfo.name = this.cookieService.get('name');
     this.userInfo.email = this.cookieService.get('email');
     this.userInfo.imageUrl = this.cookieService.get('imageUrl');
   }
 
+  /**
+   * Load files in drive using access token
+   */
   getGoogleDriveDetails() {
-    // this.GoogleAuth = gapi.auth2.getAuthInstance();
-    // console.log(this.GoogleAuth);
-    // const request = gapi.client.drive.about.get({'fields': 'user'});
+    const url = 'https://www.googleapis.com/drive/v2/files?access_token=' + this.access_token;
+    this.http.get(url).subscribe((res: any) => {
+      this.files = res.items;
+      console.log(this.files);
+    }, (err) => {
+      console.log(err);
+      alert(err.message);
+    });
+  }
 
-    // request.execute(function(response) {
-    //   console.log(response);
-    // });
+  clearCookies() {
+
+  }
+
+  logout() {
+
+    this.router.navigate(['/login']);
   }
 }

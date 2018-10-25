@@ -42,11 +42,12 @@ export class LoginComponent implements OnInit {
         console.log(googleUser);
         const profile = googleUser.getBasicProfile();
         console.log(googleUser.getAuthResponse());
-        this.cookieService.set('TokenID', googleUser.getAuthResponse().id_token);
+        this.cookieService.set('access_token', googleUser.getAuthResponse().access_token);
         this.cookieService.set('name', profile.getName());
         this.cookieService.set('email', profile.getEmail());
+        this.cookieService.set('imageUrl', profile.getImageUrl());
         this.router.navigate(['/home']);
-      }, (error) => {
+      }, (error) => { 
         alert(JSON.stringify(error, undefined, 2));
       });
   }
